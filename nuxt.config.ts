@@ -28,6 +28,7 @@ export default {
   ],
 
   buildModules: [
+    '@nuxtjs/composition-api',
     '@nuxt/typescript-build',
     '@nuxtjs/stylelint-module',
     '@nuxtjs/tailwindcss',
