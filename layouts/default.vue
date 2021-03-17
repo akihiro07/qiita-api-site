@@ -1,5 +1,7 @@
 <template>
-  <div :class="$style.wrapper">
+  <div class="min-h-screen" :class="$style.wrapper">
+    <OHeader />
+
     <Nuxt />
   </div>
 </template>
