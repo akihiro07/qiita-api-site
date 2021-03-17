@@ -12,7 +12,11 @@ export default {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
 
-  css: [],
+  css: ['@/assets/scss/default.scss'],
+
+  styleResources: {
+    scss: ['@/assets/scss/default.scss'],
+  },
 
   plugins: [],
 
@@ -29,7 +33,7 @@ export default {
     '@nuxtjs/tailwindcss',
   ],
 
-  modules: ['@nuxtjs/axios'],
+  modules: ['@nuxtjs/style-resources', '@nuxtjs/axios'],
 
   axios: {},
 
