@@ -1,5 +1,7 @@
 <template>
-  <div>検索結果ページ</div>
+  <div>
+    <OSearchResult />
+  </div>
 </template>
 
 <script lang="ts">
