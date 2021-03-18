@@ -3,6 +3,8 @@
     class="px-4 py-2 rounded border border-gray-400 outline-none"
     :type="type"
     :placeholder="placeholder"
+    :value="text"
+    @input="$emit('update:text', $event.target.value)"
   />
 </template>
 
@@ -11,6 +13,11 @@ import { defineComponent } from '@nuxtjs/composition-api'
 
 export default defineComponent({
   props: {
+    text: {
+      type: String,
+      default: '',
+    },
+
     type: {
       type: String,
       default: 'text',
@@ -22,8 +29,6 @@ export default defineComponent({
     },
   },
 
-  setup() {
-    return {}
-  },
+  setup() {},
 })
 </script>
