@@ -1,11 +1,16 @@
 <template>
-  <div>login画面</div>
+  <div></div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api'
+import { defineComponent, useAsync, useContext } from '@nuxtjs/composition-api'
 
 export default defineComponent({
-  // your nuxt config
+  setup() {
+    const { redirect } = useContext()
+    useAsync(() => redirect('/login'))
+
+    return {}
+  },
 })
 </script>
