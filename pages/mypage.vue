@@ -1,5 +1,7 @@
 <template>
-  <div>マイページ</div>
+  <div>
+    <OSearchResult :is-mypage="true" />
+  </div>
 </template>
 
 <script lang="ts">
