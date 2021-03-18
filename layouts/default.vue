@@ -1,8 +1,8 @@
 <template>
   <div class="min-h-screen" :class="$style.wrapper">
-    <OHeader />
+    <OHeader class="sticky top-0" />
 
-    <Nuxt />
+    <Nuxt class="px-56 pt-20" />
   </div>
 </template>
 
