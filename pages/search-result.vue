@@ -5,15 +5,25 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, useAsync, useContext } from '@nuxtjs/composition-api'
+import {
+  defineComponent,
+  useAsync,
+  useContext,
+  watch,
+  useRoute,
+  ref,
+  Ref,
+} from '@nuxtjs/composition-api'
 import { Item } from '@/types/qiita-types'
 
 export default defineComponent({
   setup() {
     const { $axios, query } = useContext()
+    const route = useRoute()
 
     // 記事一覧取得
-    const qiitaItems = useAsync(async () => {
+    const qiitaItems: Ref<Item[]> = ref([])
+    useAsync(async () => {
       try {
         const params = query.value
         const userid = params.userid
@@ -27,7 +37,7 @@ export default defineComponent({
           }
         )
 
-        return data
+        qiitaItems.value.splice(0, qiitaItems.value.length, ...data)
       } catch (error) {
         const { response } = error
         // eslint-disable-next-line no-console
@@ -37,8 +47,38 @@ export default defineComponent({
       }
     })
 
+    watch(
+      () => route.value.query,
+      () => fetchQiitaItems()
+    )
+
+    const fetchQiitaItems = async () => {
+      try {
+        const params = query.value
+        const userid = params.userid
+
+        const data: Item[] = await $axios.$get(
+          'https://qiita.com/api/v2/items',
+          {
+            params: {
+              query: userid,
+            },
+          }
+        )
+
+        qiitaItems.value.splice(0, qiitaItems.value.length, ...data)
+      } catch (error) {
+        const { response } = error
+        // eslint-disable-next-line no-console
+        console.error(
+          `Error: ${response.data.message}\nstatus code is ${response.status}`
+        )
+      }
+    }
+
     return {
       qiitaItems,
+      fetchQiitaItems,
     }
   },
 })

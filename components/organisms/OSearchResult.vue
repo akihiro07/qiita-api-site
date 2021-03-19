@@ -1,6 +1,6 @@
 <template>
   <div>
-    <template v-if="qiitaItems && qiitaItems > 1">
+    <template v-if="qiitaItems.length > 1">
       <MPostCard
         v-for="item of qiitaItems"
         :key="item.id"
@@ -28,7 +28,7 @@ export default defineComponent({
 
     qiitaItems: {
       type: Array,
-      default: null,
+      default: () => [],
     },
   },
 
