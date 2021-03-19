@@ -6,7 +6,7 @@
         :is-mypage="isMypage"
         :picture="item.user.profile_image_url"
         :name="item.user.id"
-        :data="item.created_at"
+        :created-at="item.created_at"
         :title="item.title"
       />
     </template>

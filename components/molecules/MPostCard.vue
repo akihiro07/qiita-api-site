@@ -7,8 +7,8 @@
           :src="picture"
           alt="avatar"
         />
-        <p class="text-gray-700 ml-3">投稿者：{{ name }}</p>
-        <p class="text-gray-700 ml-3">投稿日：{{ data }}</p>
+        <p class="text-gray-700 ml-3">{{ formatName }}</p>
+        <p class="text-gray-700 ml-3">投稿日：{{ formatCreatedAt }}</p>
       </div>
 
       <span v-if="isMypage" class="w-5 cursor-pointer">
@@ -33,7 +33,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api'
+import { computed, defineComponent } from '@nuxtjs/composition-api'
+import dayjs from 'dayjs'
+import 'dayjs/locale/ja'
+dayjs.locale('ja')
 
 export default defineComponent({
   props: {
@@ -44,16 +47,15 @@ export default defineComponent({
     },
     name: {
       type: String,
-      default: 'テスト',
+      default: '',
     },
-    data: {
+    createdAt: {
       type: String,
-      default: 'テスト月テスト日',
+      default: '',
     },
     title: {
       type: String,
-      default:
-        '画像生成も畳み込まない！TransformerによるGAN「TransGAN」誕生&解説！',
+      default: '',
     },
     isMypage: {
       type: Boolean,
@@ -61,8 +63,16 @@ export default defineComponent({
     },
   },
 
-  setup() {
-    return {}
+  setup(props) {
+    const formatCreatedAt = computed(() =>
+      dayjs(props.createdAt).format('YYYY年MM月DD日')
+    )
+
+    const formatName = computed(() => `@${props.name}`)
+    return {
+      formatCreatedAt,
+      formatName,
+    }
   },
 })
 </script>
