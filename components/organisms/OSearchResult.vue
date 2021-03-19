@@ -1,7 +1,8 @@
 <template>
   <div>
-    <template v-for="item of qiitaItems">
+    <template v-if="qiitaItems && qiitaItems > 1">
       <MPostCard
+        v-for="item of qiitaItems"
         :key="item.id"
         :is-mypage="isMypage"
         :picture="item.user.profile_image_url"
@@ -10,6 +11,8 @@
         :title="item.title"
       />
     </template>
+
+    <div v-else>該当する記事が見つかりませんでした。</div>
   </div>
 </template>
 
@@ -25,7 +28,7 @@ export default defineComponent({
 
     qiitaItems: {
       type: Array,
-      required: true,
+      default: null,
     },
   },
 
