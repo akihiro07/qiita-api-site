@@ -1,11 +1,12 @@
 <template>
   <div>
-    <OSearchResult />
+    <OSearchResult :qiita-items="qiitaItems" />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, useAsync, useContext } from '@nuxtjs/composition-api'
+import { Item } from '@/types/qiita-types'
 
 export default defineComponent({
   setup() {
@@ -17,13 +18,14 @@ export default defineComponent({
         const params = query.value
         const userid = params.userid
 
-        const data = await $axios.$get('https://qiita.com/api/v2/items', {
-          params: {
-            page: '1',
-            per_page: '3',
-            query: userid,
-          },
-        })
+        const data: Item[] = await $axios.$get(
+          'https://qiita.com/api/v2/items',
+          {
+            params: {
+              query: userid,
+            },
+          }
+        )
 
         return data
       } catch (error) {
