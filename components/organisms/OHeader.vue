@@ -16,14 +16,16 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from '@nuxtjs/composition-api'
+import { defineComponent, ref, useRouter } from '@nuxtjs/composition-api'
 
 export default defineComponent({
   setup() {
-    const keyword = ref('')
+    const router = useRouter()
 
+    const keyword = ref('')
     const searchFunc = () => {
-      console.log('search')
+      const query = `?userid=${keyword.value}`
+      router.push(`/search-result/${query}`)
     }
 
     return {
