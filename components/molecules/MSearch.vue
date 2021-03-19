@@ -1,23 +1,33 @@
 <template>
   <div class="flex">
-    <AInput type="text" placeholder="marsstay07" />
+    <AInput :text.sync="keywordRef" type="text" placeholder="marsstay07" />
     <AButton class="ml-3" text="検索" :click-func="searchFunc" />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api'
+import { computed, defineComponent } from '@nuxtjs/composition-api'
 
 export default defineComponent({
   props: {
+    keyword: {
+      type: String,
+      required: true,
+    },
+
     searchFunc: {
       type: Function,
       required: true,
     },
   },
 
-  setup() {
-    return {}
+  setup(props, context) {
+    const keywordRef = computed({
+      get: () => props.keyword,
+      set: (value) => context.emit('update:keyword', value),
+    })
+
+    return { keywordRef }
   },
 })
 </script>

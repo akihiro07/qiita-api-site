@@ -1,15 +1,14 @@
 <template>
   <input
+    v-model="textRef"
     class="px-4 py-2 rounded border border-gray-400 outline-none"
     :type="type"
     :placeholder="placeholder"
-    :value="text"
-    @input="$emit('update:text', $event.target.value)"
   />
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api'
+import { computed, defineComponent } from '@nuxtjs/composition-api'
 
 export default defineComponent({
   props: {
@@ -29,6 +28,13 @@ export default defineComponent({
     },
   },
 
-  setup() {},
+  setup(props, context) {
+    const textRef = computed({
+      get: () => props.text,
+      set: (value) => context.emit('update:text', value),
+    })
+
+    return { textRef }
+  },
 })
 </script>
