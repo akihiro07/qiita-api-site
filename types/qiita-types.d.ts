@@ -336,7 +336,7 @@ export interface Item {
    * The URL of this item
    */
   url: string
-  user: User1
+  user?: User1
   /**
    * The number of views.
    */
