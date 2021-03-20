@@ -1,22 +1,35 @@
 <template>
   <div>
-    <!-- <MPostCard
-      :id="item.id"
+    <MPostCard
+      :id="qiitaItem.id"
       :is-mypage="isMypage"
-      :picture="item.user.profile_image_url"
-      :name="item.user.id"
-      :created-at="item.created_at"
-      :title="item.title"
-    /> -->
+      :picture="qiitaItem.user.profile_image_url"
+      :name="qiitaItem.user.id"
+      :created-at="qiitaItem.created_at"
+      :title="qiitaItem.title"
+    />
 
-    <div>body</div>
+    <MItemBody :body="qiitaItem.body" />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api'
+import { defineComponent, PropType } from '@nuxtjs/composition-api'
+import { Item } from '@/types/qiita-types'
 
 export default defineComponent({
+  props: {
+    isMypage: {
+      type: Boolean,
+      default: false,
+    },
+
+    qiitaItem: {
+      type: Object as PropType<Item>,
+      required: true,
+    },
+  },
+
   setup() {
     return {}
   },

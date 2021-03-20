@@ -1,6 +1,6 @@
 <template>
   <div>
-    <OItemDetail />
+    <OItemDetail :qiita-item="qiitaItem" />
   </div>
 </template>
 

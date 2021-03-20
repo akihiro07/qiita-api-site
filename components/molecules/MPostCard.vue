@@ -69,10 +69,6 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
-    clickFunc: {
-      type: Function,
-      default: () => {},
-    },
   },
 
   setup(props) {
