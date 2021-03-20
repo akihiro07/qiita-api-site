@@ -18,7 +18,7 @@ export default {
     scss: ['@/assets/scss/default.scss'],
   },
 
-  plugins: [],
+  plugins: [{ src: '@/plugins/prism', mode: 'client' }],
 
   components: [
     {
@@ -34,7 +34,15 @@ export default {
     '@nuxtjs/tailwindcss',
   ],
 
-  modules: ['@nuxtjs/style-resources', '@nuxtjs/axios'],
+  modules: ['@nuxtjs/style-resources', '@nuxtjs/axios', '@nuxtjs/markdownit'],
+
+  markdownit: {
+    inject: true,
+    breaks: true,
+    html: false,
+    linkify: false, // Autoconvert URL-like text to links
+    typography: true,
+  },
 
   axios: {},
 

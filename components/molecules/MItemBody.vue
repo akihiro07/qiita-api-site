@@ -1,9 +1,10 @@
 <template>
-  <div class="py-4 px-5 bg-white"><div v-html="body" /></div>
+  <div class="py-4 px-5 bg-white"><div v-html="$md.render(body)" /></div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api'
+import { defineComponent, onMounted } from '@nuxtjs/composition-api'
+import Prism from '@/plugins/prism'
 
 export default defineComponent({
   props: {
@@ -14,6 +15,9 @@ export default defineComponent({
   },
 
   setup() {
+    onMounted(() => {
+      Prism.highlightAll()
+    })
     return {}
   },
 })
