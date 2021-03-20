@@ -42,6 +42,7 @@ export default {
     html: false,
     linkify: false, // Autoconvert URL-like text to links
     typography: true,
+    runtime: true,
   },
 
   axios: {},
