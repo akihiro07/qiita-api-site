@@ -19,7 +19,6 @@ import { Item } from '@/types/qiita-types'
 export default defineComponent({
   setup() {
     const { $axios, query } = useContext()
-    const route = useRoute()
 
     // 記事一覧取得
     const qiitaItems: Ref<Item[]> = ref([])
@@ -49,6 +48,7 @@ export default defineComponent({
       }
     })
 
+    const route = useRoute()
     watch(
       () => route.value.query,
       () => fetchQiitaItems()

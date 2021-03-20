@@ -28,18 +28,27 @@
       </span>
     </div>
 
-    <div class="mt-3 text-xl font-bold leading-6">{{ title }}</div>
+    <div
+      class="mt-3 text-xl font-bold leading-6 cursor-pointer hover:underline"
+      @click="toItemPage()"
+    >
+      {{ title }}
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from '@nuxtjs/composition-api'
+import { computed, defineComponent, useRouter } from '@nuxtjs/composition-api'
 import dayjs from 'dayjs'
 import 'dayjs/locale/ja'
 dayjs.locale('ja')
 
 export default defineComponent({
   props: {
+    id: {
+      type: String,
+      default: '1',
+    },
     picture: {
       type: String,
       default: require('@/assets/images/no_image.jpg'),
@@ -60,17 +69,25 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+    clickFunc: {
+      type: Function,
+      default: () => {},
+    },
   },
 
   setup(props) {
     const formatCreatedAt = computed(() =>
       dayjs(props.createdAt).format('YYYY年MM月DD日')
     )
-
     const formatName = computed(() => `@${props.name}`)
+
+    const router = useRouter()
+    const toItemPage = () => router.push(`/items/${props.id}`)
+
     return {
       formatCreatedAt,
       formatName,
+      toItemPage,
     }
   },
 })

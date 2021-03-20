@@ -3,6 +3,7 @@
     <template v-if="qiitaItems.length > 1">
       <MPostCard
         v-for="item of qiitaItems"
+        :id="item.id"
         :key="item.id"
         :is-mypage="isMypage"
         :picture="item.user.profile_image_url"
