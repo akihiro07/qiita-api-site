@@ -13,7 +13,7 @@
     </div>
 
     <div>
-      <AButton text="ログイン" />
+      <AButton text="ログイン" el="nuxtLink" :click-func="toLoginFunc" />
     </div>
   </header>
 </template>
@@ -31,9 +31,14 @@ export default defineComponent({
       router.push(`/search-result/${query}`)
     }
 
+    const toLoginFunc = () => {
+      router.push('/login/')
+    }
+
     return {
       keyword,
       searchFunc,
+      toLoginFunc,
     }
   },
 })
