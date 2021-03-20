@@ -23,16 +23,18 @@ export default defineComponent({
 
     // 記事一覧取得
     const qiitaItems: Ref<Item[]> = ref([])
+    // MEMO:useAsyncとmethodの処理を共通化したい
+    // TODO:TEST
     useAsync(async () => {
       try {
         const params = query.value
-        const userid = params.userid
+        const searchUserItems = `user:${params.userid}`
 
         const data: Item[] = await $axios.$get(
           'https://qiita.com/api/v2/items',
           {
             params: {
-              query: userid,
+              query: searchUserItems,
             },
           }
         )

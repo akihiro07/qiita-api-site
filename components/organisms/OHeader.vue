@@ -1,5 +1,8 @@
 <template>
-  <header class="px-24 py-3 flex justify-between" :class="$style.background">
+  <header
+    class="px-24 py-3 flex justify-between items-center"
+    :class="$style.background"
+  >
     <div class="flex justify-between items-center">
       <h1 class="text-3xl font-bold text-white">QiitaAPI</h1>
       <MSearch
