@@ -18,7 +18,7 @@
         <AButton text="ログアウト" :click-func="logoutFunc" />
       </div>
 
-      <AButton v-else-if="!isLogin" text="ログイン" to="/mypage/" />
+      <AButton v-else-if="!isLogin" text="ログイン" to="/login/" />
     </div>
   </header>
 </template>

@@ -11,7 +11,7 @@
         <p class="text-gray-700 ml-3">投稿日：{{ formatCreatedAt }}</p>
       </div>
 
-      <span v-if="isMypage" class="w-5 cursor-pointer">
+      <span v-if="isMypage" class="w-5 cursor-pointer" @click="deleteFunc(id)">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -68,6 +68,10 @@ export default defineComponent({
     isMypage: {
       type: Boolean,
       default: false,
+    },
+    deleteFunc: {
+      type: Function,
+      default: () => {},
     },
   },
 

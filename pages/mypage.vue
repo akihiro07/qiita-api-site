@@ -1,6 +1,10 @@
 <template>
   <div>
-    <OSearchResult :is-mypage="true" :qiita-items="qiitaItems" />
+    <OSearchResult
+      :is-mypage="true"
+      :delete-func="deleteFunc"
+      :qiita-items="qiitaItems"
+    />
   </div>
 </template>
 
@@ -44,8 +48,29 @@ export default defineComponent({
       }
     })
 
+    // 認証ユーザーの記事一覧
+    // TODO:TEST
+    const deleteFunc = async (itemID: string) => {
+      try {
+        const getAccessToken = sessionStorage.getItem('access_token')
+        const accessToken = `Bearer ${getAccessToken}`
+        await $axios.$delete(`https://qiita.com/api/v2/items/${itemID}`, {
+          headers: {
+            Authorization: accessToken,
+          },
+        })
+      } catch (error) {
+        const { response } = error
+        // eslint-disable-next-line no-console
+        console.error(
+          `Error: ${response.data.message}\nstatus code is ${response.status}`
+        )
+      }
+    }
+
     return {
       qiitaItems,
+      deleteFunc,
     }
   },
 })
