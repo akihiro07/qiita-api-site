@@ -1,6 +1,6 @@
 <template>
   <div class="grid place-items-center">
-    <div class="flex flex-col w-64">
+    <div v-cloak class="flex flex-col w-64">
       <AInput
         :text.sync="accessToken"
         type="text"
@@ -12,20 +12,27 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, useRouter } from '@nuxtjs/composition-api'
+import {
+  defineComponent,
+  ref,
+  useAsync,
+  useContext,
+  useRouter,
+} from '@nuxtjs/composition-api'
 
 export default defineComponent({
   setup() {
     const router = useRouter()
-    const accessToken = ref('')
+    const { redirect } = useContext()
 
+    useAsync(() => {
+      if (process.client && sessionStorage.getItem('access_token')) {
+        redirect('/mypage/')
+      }
+    })
+
+    const accessToken = ref('')
     const loginFunc = () => {
-      // 0.ルーティング(未ログイン時はマイページ画面にいけない)
-      // .入力した値をsessionStorageに格納
-      // .そのtokenが有効であるか判定
-      // .マイページに飛ばす（ログイン用ヘッダー、ルーティング(login画面にいけない)）
-      // step1.とりあえずアクセストークンを保存
-      // step2.有効でない値を保存する前に弾く
       sessionStorage.setItem('access_token', accessToken.value)
       router.push('/mypage/')
     }
@@ -33,3 +40,9 @@ export default defineComponent({
   },
 })
 </script>
+
+<style>
+[v-cloak] {
+  display: none;
+}
+</style>
