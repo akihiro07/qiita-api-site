@@ -7,7 +7,6 @@
 <script lang="ts">
 import {
   defineComponent,
-  useAsync,
   useContext,
   ref,
   Ref,
