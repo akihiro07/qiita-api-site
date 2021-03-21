@@ -20,9 +20,9 @@ export default defineComponent({
   setup() {
     const { $axios, query } = useContext()
 
-    // 記事一覧取得
     const qiitaItems: Ref<Item[]> = ref([])
-    // MEMO:useAsyncとmethodの処理を共通化したい
+    // 記事の一覧
+    // MEMO:useAsyncとmethodの処理を共通化したい=>pluginsにまとめるのありかも
     // TODO:TEST
     useAsync(async () => {
       try {
@@ -54,6 +54,7 @@ export default defineComponent({
       () => fetchQiitaItems()
     )
 
+    // 記事の一覧
     const fetchQiitaItems = async () => {
       try {
         const params = query.value
