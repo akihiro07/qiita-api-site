@@ -13,19 +13,12 @@
     </div>
 
     <div>
-      <AButton
-        v-if="isLogin"
-        text="ログアウト"
-        el="nuxtLink"
-        :click-func="logoutFunc"
-      />
+      <div v-if="isLogin">
+        <AButton text="マイページ" to="/mypage/" type="secondary" />
+        <AButton text="ログアウト" :click-func="logoutFunc" />
+      </div>
 
-      <AButton
-        v-else-if="!isLogin"
-        text="ログイン"
-        el="nuxtLink"
-        :click-func="toLoginFunc"
-      />
+      <AButton v-else-if="!isLogin" text="ログイン" to="/mypage/" />
     </div>
   </header>
 </template>
@@ -63,10 +56,6 @@ export default defineComponent({
       router.push(`/search-result/${query}`)
     }
 
-    const toLoginFunc = () => {
-      router.push('/login/')
-    }
-
     const logoutFunc = () => {
       sessionStorage.removeItem('access_token')
       isLogin.value = false
@@ -77,7 +66,6 @@ export default defineComponent({
       isLogin,
       keyword,
       searchFunc,
-      toLoginFunc,
       logoutFunc,
     }
   },

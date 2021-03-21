@@ -1,11 +1,21 @@
 <template>
   <button
+    v-if="!to"
     class="font-bold py-2 px-5 rounded"
     :class="[$style.button, $style[type]]"
     @click="clickFunc"
   >
     {{ text }}
   </button>
+
+  <nuxt-link
+    v-else-if="to"
+    class="font-bold py-2 px-5 rounded"
+    :class="[$style.button, $style[type]]"
+    :to="to"
+  >
+    {{ text }}
+  </nuxt-link>
 </template>
 
 <script lang="ts">
@@ -21,6 +31,11 @@ export default defineComponent({
     type: {
       type: String,
       default: 'primary',
+    },
+
+    to: {
+      type: String,
+      default: '',
     },
 
     clickFunc: {
@@ -42,6 +57,10 @@ export default defineComponent({
 
   &.primary {
     background-color: $quaternary;
+  }
+
+  &.secondary {
+    background-color: initial;
   }
 }
 </style>
