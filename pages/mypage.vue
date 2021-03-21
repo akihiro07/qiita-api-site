@@ -5,6 +5,8 @@
       :delete-func="deleteFunc"
       :qiita-items="qiitaItems"
     />
+
+    <MModal />
   </div>
 </template>
 
