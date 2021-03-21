@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col py-4 px-5 bg-white">
+  <div class="py-4 px-5 bg-white">
     <div class="flex justify-between">
       <div class="flex items-center text-xs">
         <img
@@ -29,7 +29,7 @@
     </div>
 
     <div
-      class="mt-3 text-xl font-bold leading-6 cursor-pointer hover:underline"
+      class="inline-block mt-3 text-xl font-bold leading-6 cursor-pointer hover:underline"
       @click="toItemPage()"
     >
       {{ title }}

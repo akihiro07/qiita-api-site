@@ -1,6 +1,6 @@
 <template>
   <div>
-    <OSearchResult :qiita-items="qiitaItems" />
+    <OSearchResult :is-mypage="true" :qiita-items="qiitaItems" />
   </div>
 </template>
 
@@ -11,6 +11,7 @@ import {
   useContext,
   ref,
   Ref,
+  onMounted,
 } from '@nuxtjs/composition-api'
 import { Item } from '@/types/qiita-types'
 
@@ -21,8 +22,9 @@ export default defineComponent({
     const qiitaItems: Ref<Item[]> = ref([])
     // 認証ユーザーの記事一覧
     // TODO:TEST
-    useAsync(async () => {
+    onMounted(async () => {
       try {
+        // MEMO:sessionStorageはサーバーサイド側では取得できない
         const getAccessToken = sessionStorage.getItem('access_token')
         const accessToken = `Bearer ${getAccessToken}`
         const data: Item[] = await $axios.$get(
