@@ -35,7 +35,6 @@ import {
   computed,
   defineComponent,
   PropType,
-  reactive,
   ref,
 } from '@nuxtjs/composition-api'
 import { Item } from '@/types/qiita-types'
