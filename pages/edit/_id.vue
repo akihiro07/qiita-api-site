@@ -1,13 +1,41 @@
 <template>
-  <div>編集画面</div>
+  <div><OItemEdit :qiita-item="qiitaItem" :save-func="saveFunc" /></div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api'
+import Vue from 'vue'
+import { Item } from '@/types/qiita-types'
 
-export default defineComponent({
-  setup() {
-    return {}
+// MEMO: optionsAPI使用 => 動的ページへの画面遷移時、compositionAPIは挙動が怪しい為（https://composition-api.nuxtjs.org/helpers/useasync/）
+export default Vue.extend({
+  async asyncData({ $axios, route }) {
+    try {
+      const id = route.params.id
+      const qiitaItem: Item = await $axios.$get(
+        `https://qiita.com/api/v2/items/${id}`
+      )
+
+      return { qiitaItem }
+    } catch (error) {
+      const { response } = error
+      // eslint-disable-next-line no-console
+      console.error(
+        `Error: ${response.data.message}\nstatus code is ${response.status}`
+      )
+    }
+  },
+
+  data() {
+    return {
+      qiitaItem: {},
+    }
+  },
+
+  methods: {
+    // 更新処理
+    saveFunc: () => {
+      console.log('更新処理')
+    },
   },
 })
 </script>
