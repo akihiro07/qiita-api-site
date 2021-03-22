@@ -9,14 +9,7 @@
 
       <div class="bg-white mt-4 py-4 px-5">{{ tags }}</div>
 
-      <client-only>
-        <vue-simplemde
-          v-show="!isPreview"
-          v-model="item.body"
-          :configs="configs"
-          class="markdown-body bg-white mt-4"
-        />
-      </client-only>
+      <MMarkdownEditor v-show="!isPreview" :md-text.sync="item.body" />
 
       <div v-show="isPreview" class="markdown-body bg-white mt-4 py-4 px-5">
         <div v-html="$md.render(qiitaItem.body)" />
@@ -53,23 +46,6 @@ export default defineComponent({
   },
 
   setup(props) {
-    const configs = ref({
-      toolbar: [
-        'bold',
-        'italic',
-        'heading',
-        'quote',
-        'strikethrough',
-        '|',
-        'heading-1',
-        'heading-2',
-        'heading-3',
-        '|',
-        'code',
-        'link',
-        'image',
-      ],
-    })
     const isPreview = ref(false)
     const modeText = ref('プレビュー')
     const modeChange = () => {
@@ -90,7 +66,7 @@ export default defineComponent({
       const toStringTags = tagList.join()
       return toStringTags
     })
-    return { configs, isPreview, modeText, modeChange, item, tags }
+    return { isPreview, modeText, modeChange, item, tags }
   },
 })
 </script>
