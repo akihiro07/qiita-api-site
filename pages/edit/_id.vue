@@ -3,16 +3,16 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
 import { Item } from '@/types/qiita-types'
+import Prism from '@/plugins/prism'
 
 // MEMO: optionsAPI使用 => 動的ページへの画面遷移時、compositionAPIは挙動が怪しい為（https://composition-api.nuxtjs.org/helpers/useasync/）
-export default Vue.extend({
+export default {
   async asyncData({ $axios, route }) {
     try {
-      const id = route.params.id
+      const itemId = route.params.id
       const qiitaItem: Item = await $axios.$get(
-        `https://qiita.com/api/v2/items/${id}`
+        `https://qiita.com/api/v2/items/${itemId}`
       )
 
       return { qiitaItem }
@@ -27,15 +27,44 @@ export default Vue.extend({
 
   data() {
     return {
-      qiitaItem: {},
+      qiitaItem: {} as Item,
     }
+  },
+
+  mounted: () => {
+    Prism.highlightAll()
   },
 
   methods: {
     // 更新処理
-    saveFunc: () => {
-      console.log('更新処理')
+    saveFunc() {
+      try {
+        const getAccessToken = sessionStorage.getItem('access_token')
+        const accessToken = `Bearer ${getAccessToken}`
+        const item = this.qiitaItem
+
+        this.$axios.$patch(
+          `https://qiita.com/api/v2/items/${item.id}`,
+          {
+            body: item.body,
+            private: item.private,
+            tags: item.tags,
+            title: item.title,
+          },
+          {
+            headers: {
+              Authorization: accessToken,
+            },
+          }
+        )
+      } catch (error) {
+        const { response } = error
+        // eslint-disable-next-line no-console
+        console.error(
+          `Error: ${response.data.message}\nstatus code is ${response.status}`
+        )
+      }
     },
   },
-})
+}
 </script>

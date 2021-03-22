@@ -7,7 +7,7 @@
         class="w-full font-bold text-3xl bg-transparent outline-none resize-none h-12 py-2"
       />
 
-      <div class="bg-white mt-4">{{ tags }}</div>
+      <div class="bg-white mt-4 py-4 px-5">{{ tags }}</div>
 
       <div class="markdown-body bg-white mt-4 py-4 px-5">
         <div v-html="$md.render(qiitaItem.body)" />
