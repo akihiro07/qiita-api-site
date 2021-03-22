@@ -14,6 +14,7 @@
 
     <div>
       <div v-if="isLogin">
+        <AButton text="記事を作成" to="/new-item/" type="secondary" />
         <AButton text="マイページ" to="/mypage/" type="secondary" />
         <AButton text="ログアウト" :click-func="logoutFunc" />
       </div>
