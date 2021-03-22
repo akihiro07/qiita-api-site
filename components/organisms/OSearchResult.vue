@@ -5,6 +5,7 @@
         v-for="item of qiitaItems"
         :id="item.id"
         :key="item.id"
+        :to-edit-page-func="toEditPageFunc"
         :delete-func="deleteFunc"
         :is-mypage="isMypage"
         :picture="item.user.profile_image_url"
@@ -26,6 +27,11 @@ export default defineComponent({
     isMypage: {
       type: Boolean,
       default: false,
+    },
+
+    toEditPageFunc: {
+      type: Function,
+      default: () => {},
     },
 
     deleteFunc: {

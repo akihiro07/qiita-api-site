@@ -2,11 +2,10 @@
   <div>
     <OSearchResult
       :is-mypage="true"
+      :to-edit-page-func="toEditPageFunc"
       :delete-func="deleteFunc"
       :qiita-items="qiitaItems"
     />
-
-    <MModal />
   </div>
 </template>
 
@@ -17,12 +16,14 @@ import {
   ref,
   Ref,
   onMounted,
+  useRouter,
 } from '@nuxtjs/composition-api'
 import { Item } from '@/types/qiita-types'
 
 export default defineComponent({
   setup() {
     const { $axios } = useContext()
+    const router = useRouter()
 
     const qiitaItems: Ref<Item[]> = ref([])
     // 認証ユーザーの記事一覧
@@ -50,7 +51,12 @@ export default defineComponent({
       }
     })
 
-    // 認証ユーザーの記事一覧
+    // 認証ユーザーの記事編集画面遷移
+    const toEditPageFunc = (itemID: string) => {
+      router.push(`/edit/${itemID}`)
+    }
+
+    // 認証ユーザーの記事削除
     // TODO:TEST
     const deleteFunc = async (itemID: string) => {
       try {
@@ -72,6 +78,7 @@ export default defineComponent({
 
     return {
       qiitaItems,
+      toEditPageFunc,
       deleteFunc,
     }
   },
