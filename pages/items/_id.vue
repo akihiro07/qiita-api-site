@@ -6,10 +6,11 @@
 
 <script lang="ts">
 import { Item } from '@/types/qiita-types'
+import { Context } from '@nuxt/types'
 
 // MEMO: optionsAPI使用 => 動的ページへの画面遷移時、compositionAPIは挙動が怪しい為（https://composition-api.nuxtjs.org/helpers/useasync/）
 export default {
-  async asyncData({ $axios, route }) {
+  async asyncData({ $axios, route }: Context) {
     try {
       const itemId = route.params.id
       const qiitaItem: Item = await $axios.$get(
