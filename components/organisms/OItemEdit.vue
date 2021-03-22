@@ -9,7 +9,11 @@
 
       <div class="bg-white mt-4 py-4 px-5">{{ tags }}</div>
 
-      <MMarkdownEditor v-show="!isPreview" :md-text.sync="item.body" />
+      <MMarkdownEditor
+        v-show="!isPreview"
+        class="mt-4"
+        :md-text.sync="item.body"
+      />
 
       <div v-show="isPreview" class="markdown-body bg-white mt-4 py-4 px-5">
         <div v-html="$md.render(qiitaItem.body)" />

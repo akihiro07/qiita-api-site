@@ -3,7 +3,7 @@
     <vue-simplemde
       v-model="text"
       :configs="configs"
-      class="markdown-body bg-white mt-4"
+      class="markdown-body bg-white"
     />
   </client-only>
 </template>
@@ -24,10 +24,10 @@ export default defineComponent({
       toolbar: [
         'bold',
         'italic',
-        'heading',
         'quote',
         'strikethrough',
         '|',
+        'heading',
         'heading-1',
         'heading-2',
         'heading-3',
