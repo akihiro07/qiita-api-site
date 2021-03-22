@@ -1,5 +1,7 @@
 <template>
-  <div class="py-4 px-5 bg-white"><div v-html="$md.render(body)" /></div>
+  <div class="py-4 px-5 bg-white markdown-body">
+    <div v-html="$md.render(body)" />
+  </div>
 </template>
 
 <script lang="ts">
@@ -8,6 +10,11 @@ import Prism from '@/plugins/prism'
 
 export default defineComponent({
   props: {
+    renderedBody: {
+      type: String,
+      required: true,
+    },
+
     body: {
       type: String,
       required: true,

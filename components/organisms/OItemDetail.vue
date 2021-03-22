@@ -9,7 +9,10 @@
       :title="qiitaItem.title"
     />
 
-    <MItemBody :body="qiitaItem.body" />
+    <MItemBody
+      :rendered-body="qiitaItem.rendered_body"
+      :body="qiitaItem.body"
+    />
   </div>
 </template>
 

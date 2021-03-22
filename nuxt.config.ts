@@ -12,7 +12,7 @@ export default {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
 
-  css: ['@/assets/scss/default.scss'],
+  css: ['@/assets/scss/default.scss', 'github-markdown-css'],
 
   styleResources: {
     scss: ['@/assets/scss/default.scss'],
@@ -40,7 +40,7 @@ export default {
     inject: true,
     breaks: true,
     html: false,
-    linkify: false, // Autoconvert URL-like text to links
+    linkify: true,
     typography: true,
     runtime: true,
   },
