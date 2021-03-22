@@ -12,13 +12,20 @@ export default {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
 
-  css: ['@/assets/scss/default.scss', 'github-markdown-css'],
+  css: [
+    '@/assets/scss/default.scss',
+    'github-markdown-css',
+    'simplemde/dist/simplemde.min.css',
+  ],
 
   styleResources: {
     scss: ['@/assets/scss/default.scss'],
   },
 
-  plugins: [{ src: '@/plugins/prism', mode: 'client' }],
+  plugins: [
+    { src: '@/plugins/prism', mode: 'client' },
+    { src: '@/plugins/vue-mde', mode: 'client' },
+  ],
 
   components: [
     {

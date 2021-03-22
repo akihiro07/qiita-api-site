@@ -22,7 +22,8 @@
     "dayjs": "^1.10.4",
     "github-markdown-css": "^4.0.0",
     "nuxt": "^2.14.12",
-    "prismjs": "^1.23.0"
+    "prismjs": "^1.23.0",
+    "vue-simplemde": "^2.0.0"
   },
   "devDependencies": {
     "@nuxt/types": "^2.14.12",

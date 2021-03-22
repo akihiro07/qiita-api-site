@@ -9,20 +9,35 @@
 
       <div class="bg-white mt-4 py-4 px-5">{{ tags }}</div>
 
-      <div class="markdown-body bg-white mt-4 py-4 px-5">
+      <client-only>
+        <vue-simplemde
+          v-show="!isPreview"
+          v-model="item.body"
+          :configs="configs"
+          class="markdown-body bg-white mt-4"
+        />
+      </client-only>
+
+      <div v-show="isPreview" class="markdown-body bg-white mt-4 py-4 px-5">
         <div v-html="$md.render(qiitaItem.body)" />
       </div>
     </div>
 
     <div class="col-span-2 flex flex-col">
-      <AButton text="プレビュー" />
+      <AButton :text="modeText" :click-func="modeChange" />
       <AButton class="mt-4" text="更新" :click-func="saveFunc" />
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, PropType } from '@nuxtjs/composition-api'
+import {
+  computed,
+  defineComponent,
+  PropType,
+  reactive,
+  ref,
+} from '@nuxtjs/composition-api'
 import { Item } from '@/types/qiita-types'
 
 export default defineComponent({
@@ -39,6 +54,35 @@ export default defineComponent({
   },
 
   setup(props) {
+    const configs = ref({
+      toolbar: [
+        'bold',
+        'italic',
+        'heading',
+        'quote',
+        'strikethrough',
+        '|',
+        'heading-1',
+        'heading-2',
+        'heading-3',
+        '|',
+        'code',
+        'link',
+        'image',
+      ],
+    })
+    const isPreview = ref(false)
+    const modeText = ref('プレビュー')
+    const modeChange = () => {
+      if (isPreview.value) {
+        isPreview.value = false
+        modeText.value = 'プレビュー'
+      } else {
+        isPreview.value = true
+        modeText.value = '編集'
+      }
+    }
+
     const item = computed(() => props.qiitaItem)
 
     const tags = computed(() => {
@@ -47,7 +91,7 @@ export default defineComponent({
       const toStringTags = tagList.join()
       return toStringTags
     })
-    return { item, tags }
+    return { configs, isPreview, modeText, modeChange, item, tags }
   },
 })
 </script>
