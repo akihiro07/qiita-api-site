@@ -8,6 +8,7 @@ import Prism from '@/plugins/prism'
 import { Context } from '@nuxt/types'
 
 // MEMO: optionsAPI使用 => 動的ページへの画面遷移時、compositionAPIは挙動が怪しい為（https://composition-api.nuxtjs.org/helpers/useasync/）
+// TODO:TEST
 export default {
   async asyncData({ $axios, route }: Context) {
     try {
@@ -38,6 +39,7 @@ export default {
 
   methods: {
     // 更新処理
+    // TODO:TEST
     saveFunc() {
       try {
         const getAccessToken = sessionStorage.getItem('access_token')
