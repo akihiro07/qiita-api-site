@@ -26,6 +26,10 @@ export default defineComponent({
     // TODO:TEST
     useAsync(async () => {
       try {
+        // Input:クエリパラメータの`userid`を取得
+        // axiosでQiitaAPIにrequest
+        // axiosでQiitaAPIのresponse
+        // Array<Item>をdataに格納
         const params = query.value
         const searchUserItems = `user:${params.userid}`
 
@@ -58,7 +62,7 @@ export default defineComponent({
     const fetchQiitaItems = async () => {
       try {
         const params = query.value
-        const userid = params.userid
+        const userid = `user:${params.userid}`
 
         const data: Item[] = await $axios.$get(
           'https://qiita.com/api/v2/items',

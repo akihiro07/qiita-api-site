@@ -22,7 +22,8 @@ describe('AButton.vue', () => {
       expect(wrapper.find('button').exists()).toBe(true)
     })
 
-    test('clickイベントが発生したらclickFuncが呼ばれる', () => {
+    test('clickイベントが発火したらclickFuncが呼ばれる', () => {
+      // clickイベントが発火した様にふるまう=>clickFuncメソッドが呼ばれる
       wrapper.find('button').trigger('click')
       expect(mockFunc).toHaveBeenCalled()
     })
