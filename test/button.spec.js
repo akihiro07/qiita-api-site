@@ -2,26 +2,37 @@ import { shallowMount, RouterLinkStub } from '@vue/test-utils'
 import Component from '@/components/atoms/AButton.vue'
 
 const text = 'テキスト'
+const mockFunc = jest.fn()
 const factory = (to) => {
   return shallowMount(Component, {
     propsData: {
       text,
       to,
+      clickFunc: mockFunc,
     },
     stubs: { NuxtLink: RouterLinkStub },
   })
 }
 
 describe('AButton.vue', () => {
-  test('propsのtoが空ときは<button>が表示', () => {
+  describe('propsのtoが空とき', () => {
     const wrapper = factory('')
 
-    expect(wrapper.find('button').exists()).toBe(true)
+    test('<button>が表示', () => {
+      expect(wrapper.find('button').exists()).toBe(true)
+    })
+
+    test('clickイベントが発生したらclickFuncが呼ばれる', () => {
+      wrapper.find('button').trigger('click')
+      expect(mockFunc).toHaveBeenCalled()
+    })
   })
 
-  test('propsのtoが存在するときは<a>が表示', () => {
+  describe('propsのtoが存在するとき', () => {
     const wrapper = factory('/link/')
 
-    expect(wrapper.find('a').exists()).toBe(true)
+    test('<a>が表示', () => {
+      expect(wrapper.find('a').exists()).toBe(true)
+    })
   })
 })
