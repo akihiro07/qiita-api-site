@@ -2,12 +2,13 @@ import { defineNuxtPlugin } from '@nuxtjs/composition-api'
 import { Item } from '@/types/qiita-types'
 import axios from 'axios'
 
+export const url = 'https://qiita.com/api/v2/items'
 export const getItemList = async (userid: string): Promise<Item[]> => {
   try {
     // userid検索は｀user:${params.userid}｀という形でなければならない
     const uid = `user:${userid}`
 
-    const response = await axios.get('https://qiita.com/api/v2/items', {
+    const response = await axios.get(url, {
       params: {
         // keyはquery,valueはuser:xxxx
         query: uid,
