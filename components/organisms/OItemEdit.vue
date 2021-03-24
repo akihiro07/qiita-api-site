@@ -21,6 +21,11 @@
     </div>
 
     <div class="col-span-2 flex flex-col">
+      <AButton
+        :text="visibility.text"
+        :type="visibility.type"
+        :click-func="visibilityChangeFunc"
+      />
       <AButton class="mt-4" :text="modeText" :click-func="modeChange" />
       <AButton class="mt-4" text="更新する" :click-func="saveFunc" />
     </div>
@@ -43,6 +48,11 @@ export default defineComponent({
       required: true,
     },
 
+    visibilityChangeFunc: {
+      type: Function,
+      required: true,
+    },
+
     saveFunc: {
       type: Function,
       required: true,
@@ -50,6 +60,8 @@ export default defineComponent({
   },
 
   setup(props) {
+    const item = computed(() => props.qiitaItem)
+
     const isPreview = ref(false)
     const modeText = ref('プレビュー')
     const modeChange = () => {
@@ -62,15 +74,14 @@ export default defineComponent({
       }
     }
 
-    const item = computed(() => props.qiitaItem)
-
-    const tags = computed(() => {
-      // eslint-disable-next-line prettier/prettier
-      const tagList: Array<string> = props.qiitaItem.tags.map(({ name }) => name)
-      const toStringTags = tagList.join()
-      return toStringTags
+    const visibility = computed(() => {
+      const isPrivate = item.value.private
+      const text = isPrivate ? '限定共有投稿' : '公開投稿'
+      const type = isPrivate ? 'tertiary' : 'quaternary'
+      return { text, type }
     })
-    return { isPreview, modeText, modeChange, item, tags }
+
+    return { item, isPreview, modeText, modeChange, visibility }
   },
 })
 </script>

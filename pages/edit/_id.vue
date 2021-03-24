@@ -1,5 +1,11 @@
 <template>
-  <div><OItemEdit :qiita-item="qiitaItem" :save-func="saveFunc" /></div>
+  <div>
+    <OItemEdit
+      :qiita-item="qiitaItem"
+      :visibility-change-func="visibilityChangeFunc"
+      :save-func="saveFunc"
+    />
+  </div>
 </template>
 
 <script lang="ts">
@@ -38,6 +44,12 @@ export default {
   },
 
   methods: {
+    // 公開範囲変更
+    visibilityChangeFunc() {
+      const app = this as any
+      app.qiitaItem.private = !app.qiitaItem.private
+    },
+
     // 更新処理
     // TODO:TEST
     async saveFunc() {
@@ -63,6 +75,7 @@ export default {
         )
 
         alert('更新しました。')
+        app.$router.push('/mypage/')
       } catch (error) {
         const { response } = error
         // eslint-disable-next-line no-console
