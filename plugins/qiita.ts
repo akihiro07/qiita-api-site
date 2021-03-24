@@ -44,6 +44,7 @@ const getItem = async (itemid: string): Promise<Item | {}> => {
   }
 }
 
+// 認証ユーザーの記事削除
 const deleteItem = async (itemid: string, token: string): Promise<void> => {
   try {
     await axios.delete(`https://qiita.com/api/v2/items/${itemid}`, {
@@ -59,12 +60,31 @@ const deleteItem = async (itemid: string, token: string): Promise<void> => {
     )
   }
 }
+
+// 認証ユーザーの記事一覧
+const getUserItemList = async (token: string): Promise<Item[]> => {
+  try {
+    const response = await axios.get(
+      'https://qiita.com/api/v2/authenticated_user/items',
+      {
+        headers: {
+          Authorization: token,
+        },
+      }
+    )
+    return response.data
+  } catch (error) {
+    throw new Error(error)
+  }
+}
+
 declare module 'vue/types/vue' {
   interface Vue {
     $fetchQiita: {
       getItemList: (userid: string) => Promise<Item[]>
       getItem: (itemid: string) => Promise<Item[]>
       deleteItem: (itemid: string, token: string) => void
+      getUserItemList: (token: string) => Promise<Item[]>
     }
   }
 }
@@ -75,6 +95,7 @@ declare module '@nuxt/types' {
       getItemList: (userid: string) => Promise<Item[]>
       getItem: (itemid: string) => Promise<Item[]>
       deleteItem: (itemid: string, token: string) => void
+      getUserItemList: (token: string) => Promise<Item[]>
     }
   }
 }
@@ -83,6 +104,7 @@ const modules = {
   getItemList,
   getItem,
   deleteItem,
+  getUserItemList,
 }
 
 export default defineNuxtPlugin((_, inject) => {
