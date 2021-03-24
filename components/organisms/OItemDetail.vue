@@ -1,18 +1,22 @@
 <template>
   <div>
-    <MPostCard
-      :id="qiitaItem.id"
-      :is-mypage="isMypage"
-      :picture="qiitaItem.user.profile_image_url"
-      :name="qiitaItem.user.id"
-      :created-at="qiitaItem.created_at"
-      :title="qiitaItem.title"
-    />
+    <div v-if="isItemExist">
+      <MPostCard
+        :id="qiitaItem.id"
+        :is-mypage="isMypage"
+        :picture="qiitaItem.user.profile_image_url"
+        :name="qiitaItem.user.id"
+        :created-at="qiitaItem.created_at"
+        :title="qiitaItem.title"
+      />
 
-    <MItemBody
-      :rendered-body="qiitaItem.rendered_body"
-      :body="qiitaItem.body"
-    />
+      <MItemBody
+        :rendered-body="qiitaItem.rendered_body"
+        :body="qiitaItem.body"
+      />
+    </div>
+
+    <div v-else>エラーが発生しました。</div>
   </div>
 </template>
 
@@ -33,8 +37,9 @@ export default defineComponent({
     },
   },
 
-  setup() {
-    return {}
+  setup(props) {
+    const isItemExist = !!Object.keys(props.qiitaItem).length
+    return { isItemExist }
   },
 })
 </script>

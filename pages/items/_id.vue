@@ -5,25 +5,17 @@
 </template>
 
 <script lang="ts">
-import { Item } from '@/types/qiita-types'
 import { Context } from '@nuxt/types'
 
 // MEMO: optionsAPI使用 => 動的ページへの画面遷移時、compositionAPIは挙動が怪しい為（https://composition-api.nuxtjs.org/helpers/useasync/）
 export default {
-  async asyncData({ $axios, route }: Context) {
+  async asyncData({ route, $fetchQiita }: Context) {
     try {
       const itemId = route.params.id
-      const qiitaItem: Item = await $axios.$get(
-        `https://qiita.com/api/v2/items/${itemId}`
-      )
-
+      const qiitaItem = await $fetchQiita.getItem(itemId)
       return { qiitaItem }
     } catch (error) {
-      const { response } = error
-      // eslint-disable-next-line no-console
-      console.error(
-        `Error: ${response.data.message}\nstatus code is ${response.status}`
-      )
+      console.error(error)
     }
   },
 

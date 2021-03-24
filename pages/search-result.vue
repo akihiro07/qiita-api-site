@@ -25,7 +25,7 @@ export default defineComponent({
     useAsync(async () => {
       const params = query.value
       const userid = params.userid
-      const itemList = await $fetchQiita.getItemList(userid)
+      const itemList = await $fetchQiita.getItemList(userid as string)
       qiitaItems.value.splice(0, qiitaItems.value.length, ...itemList)
     })
 
@@ -39,7 +39,7 @@ export default defineComponent({
     const fetchQiitaItems = async () => {
       const params = query.value
       const userid = params.userid
-      const itemList = await $fetchQiita.getItemList(userid)
+      const itemList = await $fetchQiita.getItemList(userid as string)
       qiitaItems.value.splice(0, qiitaItems.value.length, ...itemList)
     }
 
