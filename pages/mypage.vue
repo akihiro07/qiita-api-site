@@ -48,6 +48,10 @@ export default defineComponent({
         console.error(
           `Error: ${response.data.message}\nstatus code is ${response.status}`
         )
+
+        sessionStorage.removeItem('access_token')
+        await alert('有効なアクセストークンではありません。')
+        router.push('/login/')
       }
     })
 

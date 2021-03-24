@@ -10,6 +10,8 @@ export const getItemList = async (userid: string): Promise<Item[]> => {
 
     const response = await axios.get(url, {
       params: {
+        page: 1,
+        per_page: 100,
         // keyはquery,valueはuser:xxxx
         query: uid,
       },
