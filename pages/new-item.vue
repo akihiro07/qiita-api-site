@@ -59,11 +59,12 @@ export default defineComponent({
       } catch (error) {
         const { response } = error
         // eslint-disable-next-line no-console
-        console.log(response)
         console.error(
           `Error: ${response.data.message}\nstatus code is ${response.status}`
         )
-        alert('投稿に失敗しました。')
+        alert(
+          '投稿に失敗しました。タイトル、タグ、本文を全て入力してください。'
+        )
       }
     }
     return { itemData, saveFunc }

@@ -25,6 +25,7 @@ export default {
   plugins: [
     { src: '@/plugins/prism', mode: 'client' },
     { src: '@/plugins/vue-mde', mode: 'client' },
+    { src: '@/plugins/taginput', mode: 'client' },
     { src: '@/plugins/qiita' },
   ],
 

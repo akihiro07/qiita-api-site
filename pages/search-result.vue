@@ -18,11 +18,10 @@ import { Item } from '@/types/qiita-types'
 
 export default defineComponent({
   setup() {
-    const { $axios, query, $fetchQiita } = useContext()
+    const { query, $fetchQiita } = useContext()
 
     const qiitaItems: Ref<Item[]> = ref([])
     // 記事一覧
-    // TODO:TEST
     useAsync(async () => {
       const params = query.value
       const userid = params.userid
