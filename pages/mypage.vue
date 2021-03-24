@@ -22,7 +22,7 @@ import { Item } from '@/types/qiita-types'
 
 export default defineComponent({
   setup() {
-    const { $axios } = useContext()
+    const { $axios, $fetchQiita } = useContext()
     const router = useRouter()
 
     const qiitaItems: Ref<Item[]> = ref([])
@@ -61,17 +61,12 @@ export default defineComponent({
     }
 
     // 認証ユーザーの記事削除
-    // TODO:TEST
     const deleteFunc = async (itemID: string) => {
       if (window.confirm('本当に削除しますか？')) {
         try {
           const getAccessToken = sessionStorage.getItem('access_token')
           const accessToken = `Bearer ${getAccessToken}`
-          await $axios.$delete(`https://qiita.com/api/v2/items/${itemID}`, {
-            headers: {
-              Authorization: accessToken,
-            },
-          })
+          await $fetchQiita.deleteItem(itemID, accessToken)
           location.reload()
         } catch (error) {
           const { response } = error
