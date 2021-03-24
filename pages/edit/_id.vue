@@ -40,14 +40,14 @@ export default {
   methods: {
     // 更新処理
     // TODO:TEST
-    saveFunc() {
+    async saveFunc() {
       try {
         const getAccessToken = sessionStorage.getItem('access_token')
         const accessToken = `Bearer ${getAccessToken}`
         const app = this as any
         const item = app.qiitaItem
 
-        app.$axios.$patch(
+        await app.$axios.$patch(
           `https://qiita.com/api/v2/items/${item.id}`,
           {
             body: item.body,
@@ -61,6 +61,8 @@ export default {
             },
           }
         )
+
+        alert('更新しました。')
       } catch (error) {
         const { response } = error
         // eslint-disable-next-line no-console
