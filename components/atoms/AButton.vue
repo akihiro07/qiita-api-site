@@ -62,5 +62,15 @@ export default defineComponent({
   &.secondary {
     background-color: initial;
   }
+
+  &.tertiary {
+    background-color: initial;
+    border: 1px solid $quinary;
+    color: $quinary;
+  }
+
+  &.quaternary {
+    background-color: $quinary;
+  }
 }
 </style>

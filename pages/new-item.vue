@@ -1,6 +1,10 @@
 <template>
   <div>
-    <OItemNew :item-data="itemData" :save-func="saveFunc" />
+    <OItemNew
+      :item-data="itemData"
+      :visibility-change-func="visibilityChangeFunc"
+      :save-func="saveFunc"
+    />
   </div>
 </template>
 
@@ -32,6 +36,10 @@ export default defineComponent({
       title: '',
       tweet: false,
     })
+
+    const visibilityChangeFunc = () => {
+      itemData.private = !itemData.private
+    }
 
     // TODO:TEST
     const saveFunc = async () => {
@@ -67,7 +75,7 @@ export default defineComponent({
         )
       }
     }
-    return { itemData, saveFunc }
+    return { itemData, visibilityChangeFunc, saveFunc }
   },
 })
 </script>

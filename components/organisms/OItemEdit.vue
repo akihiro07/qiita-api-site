@@ -21,8 +21,8 @@
     </div>
 
     <div class="col-span-2 flex flex-col">
-      <AButton :text="modeText" :click-func="modeChange" />
-      <AButton class="mt-4" text="更新" :click-func="saveFunc" />
+      <AButton class="mt-4" :text="modeText" :click-func="modeChange" />
+      <AButton class="mt-4" text="更新する" :click-func="saveFunc" />
     </div>
   </div>
 </template>

@@ -21,8 +21,13 @@
     </div>
 
     <div class="col-span-2 flex flex-col">
-      <AButton :text="modeText" :click-func="modeChange" />
-      <AButton class="mt-4" text="投稿" :click-func="saveFunc" />
+      <AButton
+        :text="visibility.text"
+        :type="visibility.type"
+        :click-func="visibilityChangeFunc"
+      />
+      <AButton class="mt-4" :text="modeText" :click-func="modeChange" />
+      <AButton class="mt-4" text="投稿する" :click-func="saveFunc" />
     </div>
   </div>
 </template>
@@ -50,6 +55,11 @@ export default defineComponent({
       required: true,
     },
 
+    visibilityChangeFunc: {
+      type: Function,
+      required: true,
+    },
+
     saveFunc: {
       type: Function,
       required: true,
@@ -57,6 +67,8 @@ export default defineComponent({
   },
 
   setup(props) {
+    const item = computed(() => props.itemData)
+
     const isPreview = ref(false)
     const modeText = ref('プレビュー')
     const modeChange = () => {
@@ -69,9 +81,20 @@ export default defineComponent({
       }
     }
 
-    const item = computed(() => props.itemData)
+    const visibility = computed(() => {
+      const isPrivate = item.value.private
+      const text = isPrivate ? '限定共有投稿' : '公開投稿'
+      const type = isPrivate ? 'tertiary' : 'quaternary'
+      return { text, type }
+    })
 
-    return { isPreview, modeText, modeChange, item }
+    return {
+      isPreview,
+      modeText,
+      modeChange,
+      item,
+      visibility,
+    }
   },
 })
 </script>
