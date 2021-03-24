@@ -10,11 +10,6 @@ import Prism from '@/plugins/prism'
 
 export default defineComponent({
   props: {
-    renderedBody: {
-      type: String,
-      required: true,
-    },
-
     body: {
       type: String,
       required: true,

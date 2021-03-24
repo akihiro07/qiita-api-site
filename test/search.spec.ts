@@ -1,6 +1,5 @@
 import { shallowMount } from '@vue/test-utils'
 import Component from '@/components/molecules/MSearch.vue'
-import ChildButton from '@/components/atoms/AButton.vue'
 import ChildInput from '@/components/atoms/AInput.vue'
 
 const keyword = 'ユーザーID検索'

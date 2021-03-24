@@ -1,6 +1,6 @@
 <template>
   <div class="flex">
-    <AInput :text.sync="keywordRef" type="text" placeholder="marsstay07" />
+    <AInput :text.sync="keywordRef" type="text" placeholder="ユーザーID検索" />
     <AButton class="ml-3" text="検索" :click-func="searchFunc" />
   </div>
 </template>
