@@ -7,8 +7,15 @@
 
 <script lang="ts">
 import { computed, defineComponent } from '@nuxtjs/composition-api'
+import AInput from '@/components/atoms/AInput.vue'
+import AButton from '@/components/atoms/AButton.vue'
 
 export default defineComponent({
+  components: {
+    AInput,
+    AButton,
+  },
+
   props: {
     keyword: {
       type: String,

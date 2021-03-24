@@ -23,7 +23,7 @@ describe('AInput.vue', () => {
     // ↑エイリアス
     // inputElement.element.value = text
     // inputElement.trigger('input')
-    expect(wrapper.emitted()['update:text'][0][0]).toBe(text)
+    expect(wrapper.emitted()['update:text']![0][0]).toBe(text)
   })
 
   test('propsのtypeを<input>にbind', () => {

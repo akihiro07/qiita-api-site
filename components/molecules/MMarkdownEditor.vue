@@ -10,8 +10,14 @@
 
 <script lang="ts">
 import { computed, defineComponent, ref } from '@nuxtjs/composition-api'
+// 明示的にimportしないと、jestで`Unknown custom element...`が起きる
+import VueSimplemde from 'vue-simplemde'
 
 export default defineComponent({
+  components: {
+    VueSimplemde,
+  },
+
   props: {
     mdText: {
       type: String,

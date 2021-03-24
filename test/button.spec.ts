@@ -3,7 +3,7 @@ import Component from '@/components/atoms/AButton.vue'
 
 const text = 'テキスト'
 const mockFunc = jest.fn()
-const factory = (to) => {
+const factory = (to: string) => {
   return shallowMount(Component, {
     propsData: {
       text,
