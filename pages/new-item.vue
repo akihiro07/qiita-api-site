@@ -32,7 +32,7 @@ export default defineComponent({
     const itemData = reactive<PostItemData>({
       body: '',
       private: true, // 限定共有フラグ
-      tags: [{ name: 'test' }],
+      tags: [],
       title: '',
       tweet: false,
     })
