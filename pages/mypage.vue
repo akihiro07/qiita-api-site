@@ -59,20 +59,25 @@ export default defineComponent({
     // 認証ユーザーの記事削除
     // TODO:TEST
     const deleteFunc = async (itemID: string) => {
-      try {
-        const getAccessToken = sessionStorage.getItem('access_token')
-        const accessToken = `Bearer ${getAccessToken}`
-        await $axios.$delete(`https://qiita.com/api/v2/items/${itemID}`, {
-          headers: {
-            Authorization: accessToken,
-          },
-        })
-      } catch (error) {
-        const { response } = error
-        // eslint-disable-next-line no-console
-        console.error(
-          `Error: ${response.data.message}\nstatus code is ${response.status}`
-        )
+      if (window.confirm('本当に削除しますか？')) {
+        try {
+          const getAccessToken = sessionStorage.getItem('access_token')
+          const accessToken = `Bearer ${getAccessToken}`
+          await $axios.$delete(`https://qiita.com/api/v2/items/${itemID}`, {
+            headers: {
+              Authorization: accessToken,
+            },
+          })
+          location.reload()
+        } catch (error) {
+          const { response } = error
+          // eslint-disable-next-line no-console
+          console.error(
+            `Error: ${response.data.message}\nstatus code is ${response.status}`
+          )
+        }
+      } else {
+        window.alert('削除をキャンセルしました。')
       }
     }
 
