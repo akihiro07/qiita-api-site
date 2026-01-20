@@ -22,7 +22,7 @@
     "core-js": "^3.8.3",
     "dayjs": "^1.10.4",
     "github-markdown-css": "^4.0.0",
-    "nuxt": "^2.14.12",
+    "nuxt": "^3.0.0",
     "prismjs": "^1.23.0",
     "vue-simplemde": "^2.0.0"
   },
